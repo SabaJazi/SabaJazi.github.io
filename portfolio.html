@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+            color: #333; /* Dark text color */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        section {
+            padding: 4rem 0;
+            border-radius: 0.75rem; /* Rounded corners for sections */
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .header-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background for header */
+            color: white;
+        }
+        .section-bg-light {
+            background-color: white;
+        }
+        .section-bg-dark {
+            background-color: #3f51b5; /* Deeper blue for contrast */
+            color: white;
+        }
+        .btn-primary {
+            background-color: #4f46e5; /* Indigo button */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca; /* Darker indigo on hover */
+        }
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        .social-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <!-- Header Section -->
+    <header id="home" class="header-bg py-20 text-center rounded-b-lg">
+        <div class="container flex flex-col items-center">
+            <!-- Profile Image Placeholder -->
+            <img src="https://placehold.co/150x150/667eea/ffffff?text=Your+Photo" alt="Your Photo" class="w-36 h-36 rounded-full border-4 border-white shadow-lg mb-6 object-cover">
+            <h1 class="text-5xl font-bold mb-3">Hello, I'm [Your Name]</h1>
+            <p class="text-xl font-light mb-8">A passionate [Your Profession] specializing in [Your Niche].</p>
+            <a href="#projects" class="btn-primary font-semibold text-lg hover:shadow-lg">View My Work</a>
+        </div>
+    </header>
+
+    <!-- About Me Section -->
+    <section id="about" class="section-bg-light container text-center">
+        <h2 class="text-4xl font-bold mb-8 text-gray-800">About Me</h2>
+        <p class="text-lg leading-relaxed max-w-3xl mx-auto mb-6">
+            Welcome to my portfolio! I am a [Your Profession] with [Number] years of experience in [Your Industry].
+            My expertise lies in [mention key areas, e.g., web development, data analysis, graphic design], and I love
+            turning complex problems into simple, elegant solutions. I'm always eager to learn new technologies
+            and take on challenging projects that allow me to grow and innovate.
+        </p>
+        <p class="text-lg leading-relaxed max-w-3xl mx-auto">
+            Outside of work, I enjoy [mention hobbies or interests, e.g., hiking, reading, playing music].
+            Feel free to connect with me!
+        </p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-bg-dark container text-center">
+        <h2 class="text-4xl font-bold mb-8">My Skills</h2>
+        <div class="flex flex-wrap justify-center gap-4">
+            <!-- Example Skills - Customize these -->
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Web Development</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">UI/UX Design</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">JavaScript</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">React.js</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Python</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Data Analysis</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Graphic Design</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Content Creation</span>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-bg-light container text-center">
+        <h2 class="text-4xl font-bold mb-12 text-gray-800">My Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project Card 1 -->
+            <div class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <img src="https://placehold.co/400x250/e0e7ff/3f51b5?text=Project+1+Image" alt="Project 1" class="w-full h-48 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold mb-2 text-gray-800">[Project Title 1]</h3>
+                <p class="text-gray-600 mb-4">A brief description of your project, highlighting its purpose and key features. Mention technologies used.</p>
+                <a href="#" class="btn-primary inline-block text-sm" target="_blank" rel="noopener noreferrer">View Project</a>
+            </div>
+            <!-- Project Card 2 -->
+            <div class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <img src="https://placehold.co/400x250/e0e7ff/3f51b5?text=Project+2+Image" alt="Project 2" class="w-full h-48 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold mb-2 text-gray-800">[Project Title 2]</h3>
+                <p class="text-gray-600 mb-4">Another project description. What problem did it solve? What did you learn?</p>
+                <a href="#" class="btn-primary inline-block text-sm" target="_blank" rel="noopener noreferrer">View Project</a>
+            </div>
+            <!-- Project Card 3 -->
+            <div class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <img src="https://placehold.co/400x250/e0e7ff/3f51b5?text=Project+3+Image" alt="Project 3" class="w-full h-48 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold mb-2 text-gray-800">[Project Title 3]</h3>
+                <p class="text-gray-600 mb-4">Details about your third project. Focus on your contribution and impact.</p>
+                <a href="#" class="btn-primary inline-block text-sm" target="_blank" rel="noopener noreferrer">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-bg-dark container text-center">
+        <h2 class="text-4xl font-bold mb-8">Get In Touch</h2>
+        <p class="text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+            I'm always open to new opportunities and collaborations. Feel free to reach out to me via email or connect on social media!
+        </p>
+        <div class="mb-8">
+            <a href="mailto:your.email@example.com" class="btn-primary font-semibold text-lg hover:shadow-lg">Email Me</a>
+        </div>
+        <div class="flex justify-center space-x-6">
+            <!-- Social Media Icons - Replace # with your actual links -->
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="social-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 3 8.38 8.38 0 0 0 18 2c-2.43 0-4.45 1.19-5.73 3.49A2.42 2.42 0 0 0 12 5.5c-.32 0-.64-.1-1-.2A2.42 2.42 0 0 0 9.73 5.49C8.45 3.19 6.43 2 4 2a8.38 8.38 0 0 0-1.91 1.77A5.07 5.07 0 0 0 2 4.77 5.44 5.44 0 0 0 1 12.06c0 5.43 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V19"></path></svg>
+            </a>
+            <!-- Add more social icons as needed -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-8 rounded-t-lg">
+        <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
