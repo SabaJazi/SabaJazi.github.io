@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Project Title] - Details</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+            color: #333; /* Dark text color */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        section {
+            padding: 4rem 0;
+            border-radius: 0.75rem; /* Rounded corners for sections */
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .header-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background for header */
+            color: white;
+        }
+        .section-bg-light {
+            background-color: white;
+        }
+        .section-bg-dark {
+            background-color: #3f51b5; /* Deeper blue for contrast */
+            color: white;
+        }
+        .btn-primary {
+            background-color: #4f46e5; /* Indigo button */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca; /* Darker indigo on hover */
+        }
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        .social-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: #4f46e5;
+            border-radius: 50%;
+            border: 3px solid #764ba2;
+        }
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 0.7rem;
+            top: 1.5rem;
+            bottom: -2rem;
+            width: 2px;
+            background-color: #764ba2;
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <!-- Project Header Section -->
+    <header class="header-bg py-16 text-center rounded-b-lg">
+        <div class="container flex flex-col items-center">
+            <a href="index.html" class="btn-primary mb-6 text-base px-4 py-2 hover:shadow-lg">← Back to Portfolio</a>
+            <h1 class="text-5xl font-bold mb-3">[Project Title]</h1>
+            <p class="text-xl font-light mb-8">A deep dive into [brief project sub-title/summary].</p>
+        </div>
+    </header>
+
+    <!-- Project Overview Section -->
+    <section class="section-bg-light container text-center">
+        <h2 class="text-4xl font-bold mb-8 text-gray-800">Project Overview</h2>
+        <img src="https://placehold.co/800x450/e0e7ff/3f51b5?text=Main+Project+Image" alt="Main Project Image" class="w-full max-w-4xl mx-auto rounded-lg shadow-md mb-8">
+        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-6">
+            This project, [Project Title], was developed to [explain the core purpose or problem it solves].
+            It involved [mention key technologies, methodologies, or the scope of work].
+            My primary role in this project was [describe your specific contribution, e.g., lead developer, UI/UX designer, data analyst].
+        </p>
+        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-6">
+            Key features include:
+            <ul class="list-disc list-inside text-left mx-auto max-w-2xl mt-4">
+                <li>Feature 1: Detailed explanation of its functionality and benefit.</li>
+                <li>Feature 2: How it improves user experience or solves a specific problem.</li>
+                <li>Feature 3: Any unique or innovative aspects of this feature.</li>
+            </ul>
+        </p>
+        <div class="mt-8 flex justify-center gap-4">
+            <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer">Live Demo (if any)</a>
+            <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer">GitHub Repo (if any)</a>
+        </div>
+    </section>
+
+    <!-- Project Phases/Process Section -->
+    <section class="section-bg-dark container text-center">
+        <h2 class="text-4xl font-bold mb-12">Project Development Phases</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+            <div class="timeline-item">
+                <h3 class="text-2xl font-semibold mb-2">1. Planning & Research</h3>
+                <p class="text-white text-lg">
+                    This phase involved gathering requirements, defining the project scope, and conducting
+                    initial research into existing solutions and technologies. We focused on understanding
+                    user needs and setting clear objectives.
+                </p>
+            </div>
+            <div class="timeline-item">
+                <h3 class="text-2xl font-semibold mb-2">2. Design & Prototyping</h3>
+                <p class="text-white text-lg">
+                    Here, we created wireframes, mockups, and interactive prototypes. User flows were mapped out,
+                    and design iterations were made based on feedback sessions to ensure a user-friendly interface.
+                </p>
+            </div>
+            <div class="timeline-item">
+                <h3 class="text-2xl font-semibold mb-2">3. Development & Implementation</h3>
+                <p class="text-white text-lg">
+                    The core coding phase where designs were translated into functional components.
+                    Backend logic, database integration, and frontend development were carried out.
+                    Agile methodologies were applied for iterative progress.
+                </p>
+            </div>
+            <div class="timeline-item">
+                <h3 class="text-2xl font-semibold mb-2">4. Testing & Iteration</h3>
+                <p class="text-white text-lg">
+                    Rigorous testing, including unit, integration, and user acceptance testing, was performed.
+                    Bugs were identified and fixed, and features were refined based on performance and usability feedback.
+                </p>
+            </div>
+            <div class="timeline-item">
+                <h3 class="text-2xl font-semibold mb-2">5. Deployment & Launch</h3>
+                <p class="text-white text-lg">
+                    The project was deployed to production environments, ensuring smooth operation and accessibility.
+                    Post-launch monitoring and initial support were provided.
+                </p>
+            </div>
+            <div class="timeline-item">
+                <h3 class="text-2xl font-semibold mb-2">6. Post-Launch & Future Plans</h3>
+                <p class="text-white text-lg">
+                    Ongoing maintenance, performance optimization, and planning for future enhancements or
+                    new features based on user engagement and analytics.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualizations/Screenshots Section -->
+    <section class="section-bg-light container text-center">
+        <h2 class="text-4xl font-bold mb-12 text-gray-800">Visualizations & Screenshots</h2>
+        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-8">
+            Explore various aspects of the project through these visuals, showcasing the user interface, key functionalities, or data insights.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <div class="bg-gray-100 p-4 rounded-xl shadow-lg">
+                <img src="https://placehold.co/600x350/f0f4ff/3f51b5?text=Screenshot+1" alt="Screenshot 1" class="w-full h-auto rounded-md mb-4">
+                <p class="text-gray-700 text-lg">Description of Screenshot 1: This image highlights the main dashboard/user interface.</p>
+            </div>
+            <div class="bg-gray-100 p-4 rounded-xl shadow-lg">
+                <img src="https://placehold.co/600x350/f0f4ff/3f51b5?text=Screenshot+2" alt="Screenshot 2" class="w-full h-auto rounded-md mb-4">
+                <p class="text-gray-700 text-lg">Description of Screenshot 2: Demonstrates a key feature or complex interaction.</p>
+            </div>
+            <div class="bg-gray-100 p-4 rounded-xl shadow-lg">
+                <img src="https://placehold.co/600x350/f0f4ff/3f51b5?text=Data+Visualization" alt="Data Visualization" class="w-full h-auto rounded-md mb-4">
+                <p class="text-gray-700 text-lg">Description of Visualization: An example of a data visualization generated by the project.</p>
+            </div>
+            <div class="bg-gray-100 p-4 rounded-xl shadow-lg">
+                <img src="https://placehold.co/600x350/f0f4ff/3f51b5?text=Before+and+After" alt="Before and After" class="w-full h-auto rounded-md mb-4">
+                <p class="text-gray-700 text-lg">Description of Comparison: Illustrates a significant improvement or transformation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Used Section -->
+    <section class="section-bg-dark container text-center">
+        <h2 class="text-4xl font-bold mb-8">Technologies Used</h2>
+        <div class="flex flex-wrap justify-center gap-4">
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">React</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Node.js</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">MongoDB</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Tailwind CSS</span>
+            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">AWS S3</span>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-8 rounded-t-lg">
+        <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
