@@ -6,163 +6,197 @@
     <title>[Project Title] - Details</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Playfair Display for headings, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Custom styles to override/enhance Tailwind for a specific look */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5; /* Light grey background */
-            color: #333; /* Dark text color */
+            background-color: #fefefe; /* Very subtle off-white for a clean look */
+            color: #333333; /* Dark grey text */
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: #1a1a1a; /* Almost black for headings */
         }
         .container {
-            max-width: 1200px;
+            max-width: 1000px; /* Consistent narrower container for elegance */
             margin: 0 auto;
             padding: 2rem;
         }
         section {
-            padding: 4rem 0;
-            border-radius: 0.75rem; /* Rounded corners for sections */
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 6rem 0; /* Consistent vertical spacing */
+            margin-bottom: 0; /* Remove margin-bottom from sections */
+            /* No border-bottom here, as portfolio uses it for projects and this is a single page */
         }
-        .header-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradient background for header */
-            color: white;
-        }
-        .section-bg-light {
-            background-color: white;
-        }
-        .section-bg-dark {
-            background-color: #3f51b5; /* Deeper blue for contrast */
-            color: white;
-        }
-        .btn-primary {
-            background-color: #4f46e5; /* Indigo button */
-            color: white;
+
+        /* Reusable button style from main portfolio */
+        .btn-minimal {
+            display: inline-block;
             padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            transition: background-color 0.3s ease;
+            border: 1px solid #1a1a1a;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
-        .btn-primary:hover {
-            background-color: #4338ca; /* Darker indigo on hover */
+        .btn-minimal:hover {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            transform: translateY(-2px);
         }
-        .social-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s ease;
+
+        /* Cohesive Color Palette for sections */
+        .project-header-bg {
+            background: linear-gradient(135deg, #FFF8F0 0%, #FEFEFB 100%); /* Very light, subtle warm gradient from hero */
         }
-        .social-icon:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+        .section-bg-cohesive {
+            background-color: #FDFBF8; /* Consistent very soft warm white from about/contact */
         }
+        .footer-bg-cohesive {
+            background-color: #F4F4F4; /* Consistent slightly darker light grey from footer */
+        }
+
+        /* Timeline specific styling, updated for new palette */
         .timeline-item {
             position: relative;
-            padding-left: 2rem;
-            margin-bottom: 2rem;
+            padding-left: 2.5rem; /* Increased padding for visual balance */
+            margin-bottom: 2.5rem; /* More space between items */
         }
         .timeline-item::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0.5rem;
+            top: 0.75rem; /* Adjust position for new padding */
             width: 1rem;
             height: 1rem;
-            background-color: #4f46e5;
+            background-color: #555555; /* Darker dot for contrast */
             border-radius: 50%;
-            border: 3px solid #764ba2;
+            border: 2px solid #888888; /* Softer border */
+            z-index: 1; /* Ensure dot is on top of line */
         }
         .timeline-item:not(:last-child)::after {
             content: '';
             position: absolute;
-            left: 0.7rem;
+            left: 0.45rem; /* Center the line with the dot */
             top: 1.5rem;
-            bottom: -2rem;
+            bottom: -2.5rem; /* Extend line to next item */
             width: 2px;
-            background-color: #764ba2;
+            background-color: #CCCCCC; /* Lighter line for softer look */
+        }
+
+        /* Styling for technology tags */
+        .tech-tag {
+            background-color: #e0e0e0; /* Light grey tag */
+            color: #4a4a4a; /* Darker text for readability */
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px; /* Fully rounded */
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        .tech-tag:hover {
+            background-color: #d0d0d0;
+        }
+
+        /* Visualizations/Screenshots section styling */
+        .screenshot-card {
+            background-color: white; /* Keep cards white within light section */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .screenshot-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        .screenshot-card img {
+            border-radius: 0.25rem; /* Slightly rounded images within cards */
         }
     </style>
 </head>
-<body class="leading-relaxed">
+<body class="antialiased">
 
     <!-- Project Header Section -->
-    <header class="header-bg py-16 text-center rounded-b-lg">
+    <header class="project-header-bg py-16 text-center">
         <div class="container flex flex-col items-center">
-            <a href="index.html" class="btn-primary mb-6 text-base px-4 py-2 hover:shadow-lg">← Back to Portfolio</a>
-            <h1 class="text-5xl font-bold mb-3">[Project Title]</h1>
-            <p class="text-xl font-light mb-8">A deep dive into [brief project sub-title/summary].</p>
+            <a href="index.html" class="btn-minimal mb-6 text-base px-4 py-2 hover:shadow-lg">← Back to Portfolio</a>
+            <h1 class="text-5xl font-playfair-display font-bold mb-3">[Project Title]</h1>
+            <p class="text-xl font-light text-gray-700 mb-8">A deep dive into [brief project sub-title/summary].</p>
         </div>
     </header>
 
     <!-- Project Overview Section -->
-    <section class="section-bg-light container text-center">
-        <h2 class="text-4xl font-bold mb-8 text-gray-800">Project Overview</h2>
-        <img src="https://placehold.co/800x450/e0e7ff/3f51b5?text=Main+Project+Image" alt="Main Project Image" class="w-full max-w-4xl mx-auto rounded-lg shadow-md mb-8">
-        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-6">
+    <section class="section-bg-cohesive container text-center">
+        <h2 class="text-4xl font-playfair-display font-bold mb-8 text-gray-800">Project Overview</h2>
+        <img src="https://placehold.co/800x450/e8e8e8/333333?text=Main+Project+Image" alt="Main Project Image" class="w-full max-w-4xl mx-auto rounded-md shadow-lg mb-8 object-cover">
+        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-6 text-gray-700">
             This project, [Project Title], was developed to [explain the core purpose or problem it solves].
             It involved [mention key technologies, methodologies, or the scope of work].
             My primary role in this project was [describe your specific contribution, e.g., lead developer, UI/UX designer, data analyst].
         </p>
-        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-6">
+        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-6 text-gray-700">
             Key features include:
-            <ul class="list-disc list-inside text-left mx-auto max-w-2xl mt-4">
+            <ul class="list-disc list-inside text-left mx-auto max-w-2xl mt-4 text-gray-700">
                 <li>Feature 1: Detailed explanation of its functionality and benefit.</li>
                 <li>Feature 2: How it improves user experience or solves a specific problem.</li>
                 <li>Feature 3: Any unique or innovative aspects of this feature.</li>
             </ul>
         </p>
         <div class="mt-8 flex justify-center gap-4">
-            <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer">Live Demo (if any)</a>
-            <a href="#" class="btn-primary" target="_blank" rel="noopener noreferrer">GitHub Repo (if any)</a>
+            <a href="#" class="btn-minimal" target="_blank" rel="noopener noreferrer">Live Demo (if any)</a>
+            <a href="#" class="btn-minimal" target="_blank" rel="noopener noreferrer">GitHub Repo (if any)</a>
         </div>
     </section>
 
     <!-- Project Phases/Process Section -->
-    <section class="section-bg-dark container text-center">
-        <h2 class="text-4xl font-bold mb-12">Project Development Phases</h2>
+    <section class="section-bg-cohesive container text-center">
+        <h2 class="text-4xl font-playfair-display font-bold mb-12">Project Development Phases</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
             <div class="timeline-item">
-                <h3 class="text-2xl font-semibold mb-2">1. Planning & Research</h3>
-                <p class="text-white text-lg">
+                <h3 class="text-2xl font-playfair-display font-semibold mb-2 text-gray-800">1. Planning & Research</h3>
+                <p class="text-gray-700 text-lg">
                     This phase involved gathering requirements, defining the project scope, and conducting
                     initial research into existing solutions and technologies. We focused on understanding
                     user needs and setting clear objectives.
                 </p>
             </div>
             <div class="timeline-item">
-                <h3 class="text-2xl font-semibold mb-2">2. Design & Prototyping</h3>
-                <p class="text-white text-lg">
+                <h3 class="text-2xl font-playfair-display font-semibold mb-2 text-gray-800">2. Design & Prototyping</h3>
+                <p class="text-gray-700 text-lg">
                     Here, we created wireframes, mockups, and interactive prototypes. User flows were mapped out,
                     and design iterations were made based on feedback sessions to ensure a user-friendly interface.
                 </p>
             </div>
             <div class="timeline-item">
-                <h3 class="text-2xl font-semibold mb-2">3. Development & Implementation</h3>
-                <p class="text-white text-lg">
+                <h3 class="text-2xl font-playfair-display font-semibold mb-2 text-gray-800">3. Development & Implementation</h3>
+                <p class="text-gray-700 text-lg">
                     The core coding phase where designs were translated into functional components.
                     Backend logic, database integration, and frontend development were carried out.
                     Agile methodologies were applied for iterative progress.
                 </p>
             </div>
             <div class="timeline-item">
-                <h3 class="text-2xl font-semibold mb-2">4. Testing & Iteration</h3>
-                <p class="text-white text-lg">
+                <h3 class="text-2xl font-playfair-display font-semibold mb-2 text-gray-800">4. Testing & Iteration</h3>
+                <p class="text-gray-700 text-lg">
                     Rigorous testing, including unit, integration, and user acceptance testing, was performed.
                     Bugs were identified and fixed, and features were refined based on performance and usability feedback.
                 </p>
             </div>
             <div class="timeline-item">
-                <h3 class="text-2xl font-semibold mb-2">5. Deployment & Launch</h3>
-                <p class="text-white text-lg">
+                <h3 class="text-2xl font-playfair-display font-semibold mb-2 text-gray-800">5. Deployment & Launch</h3>
+                <p class="text-gray-700 text-lg">
                     The project was deployed to production environments, ensuring smooth operation and accessibility.
                     Post-launch monitoring and initial support were provided.
                 </p>
             </div>
             <div class="timeline-item">
-                <h3 class="text-2xl font-semibold mb-2">6. Post-Launch & Future Plans</h3>
-                <p class="text-white text-lg">
+                <h3 class="text-2xl font-playfair-display font-semibold mb-2 text-gray-800">6. Post-Launch & Future Plans</h3>
+                <p class="text-gray-700 text-lg">
                     Ongoing maintenance, performance optimization, and planning for future enhancements or
                     new features based on user engagement and analytics.
                 </p>
@@ -171,46 +205,49 @@
     </section>
 
     <!-- Visualizations/Screenshots Section -->
-    <section class="section-bg-light container text-center">
-        <h2 class="text-4xl font-bold mb-12 text-gray-800">Visualizations & Screenshots</h2>
-        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-8">
+    <section class="section-bg-cohesive container text-center">
+        <h2 class="text-4xl font-playfair-display font-bold mb-12 text-gray-800">Visualizations & Screenshots</h2>
+        <p class="text-lg leading-relaxed max-w-4xl mx-auto mb-8 text-gray-700">
             Explore various aspects of the project through these visuals, showcasing the user interface, key functionalities, or data insights.
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            <div class="bg-gray-100 p-4 rounded-xl shadow-lg">
-                <img src="https://placehold.co/600x350/f0f4ff/3f51b5?text=Screenshot+1" alt="Screenshot 1" class="w-full h-auto rounded-md mb-4">
+            <div class="screenshot-card">
+                <img src="https://placehold.co/600x350/e8e8e8/333333?text=Screenshot+1" alt="Screenshot 1" class="w-full h-auto mb-4 object-cover">
                 <p class="text-gray-700 text-lg">Description of Screenshot 1: This image highlights the main dashboard/user interface.</p>
             </div>
-            <div class="bg-gray-100 p-4 rounded-xl shadow-lg">
-                <img src="https://placehold.co/600x350/f0f4ff/3f51b5?text=Screenshot+2" alt="Screenshot 2" class="w-full h-auto rounded-md mb-4">
+            <div class="screenshot-card">
+                <img src="https://placehold.co/600x350/e8e8e8/333333?text=Screenshot+2" alt="Screenshot 2" class="w-full h-auto mb-4 object-cover">
                 <p class="text-gray-700 text-lg">Description of Screenshot 2: Demonstrates a key feature or complex interaction.</p>
             </div>
-            <div class="bg-gray-100 p-4 rounded-xl shadow-lg">
-                <img src="https://placehold.co/600x350/f0f4ff/3f51b5?text=Data+Visualization" alt="Data Visualization" class="w-full h-auto rounded-md mb-4">
+            <div class="screenshot-card">
+                <img src="https://placehold.co/600x350/e8e8e8/333333?text=Data+Visualization" alt="Data Visualization" class="w-full h-auto mb-4 object-cover">
                 <p class="text-gray-700 text-lg">Description of Visualization: An example of a data visualization generated by the project.</p>
             </div>
-            <div class="bg-gray-100 p-4 rounded-xl shadow-lg">
-                <img src="https://placehold.co/600x350/f0f4ff/3f51b5?text=Before+and+After" alt="Before and After" class="w-full h-auto rounded-md mb-4">
+            <div class="screenshot-card">
+                <img src="https://placehold.co/600x350/e8e8e8/333333?text=Before+and+After" alt="Before and After" class="w-full h-auto mb-4 object-cover">
                 <p class="text-gray-700 text-lg">Description of Comparison: Illustrates a significant improvement or transformation.</p>
             </div>
         </div>
     </section>
 
     <!-- Technologies Used Section -->
-    <section class="section-bg-dark container text-center">
-        <h2 class="text-4xl font-bold mb-8">Technologies Used</h2>
+    <section class="section-bg-cohesive container text-center">
+        <h2 class="text-4xl font-playfair-display font-bold mb-8">Technologies Used</h2>
         <div class="flex flex-wrap justify-center gap-4">
-            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">React</span>
-            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Node.js</span>
-            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">MongoDB</span>
-            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">Tailwind CSS</span>
-            <span class="bg-indigo-600 text-white px-5 py-2 rounded-full text-lg font-medium shadow-md">AWS S3</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">Tailwind CSS</span>
+            <span class="tech-tag">AWS S3</span>
+            <span class="tech-tag">D3.js</span>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-8 rounded-t-lg">
-        <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+    <footer class="footer-bg-cohesive text-gray-600 text-center py-8">
+        <div class="container">
+            <p class="text-sm">&copy; 2025 [Your Name]. All rights reserved.</p>
+        </div>
     </footer>
 
 </body>
