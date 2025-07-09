@@ -77,17 +77,17 @@
             justify-content: center;
             align-items: center;
         }
-        #us-map { /* Changed ID from world-map to us-map */
+        #us-map {
             display: block; /* Ensure SVG takes up space */
             width: 100%;
             height: 100%;
         }
-        .state { /* Changed class from country to state */
+        .state {
             stroke: #ffffff; /* White borders for states */
             stroke-width: 0.5px;
             transition: fill 0.3s ease;
         }
-        .state:hover { /* Changed class from country to state */
+        .state:hover {
             opacity: 0.8;
         }
         .highlighted {
@@ -150,22 +150,23 @@
 
             const svg = d3.select("#map-container")
                 .append("svg")
-                .attr("id", "us-map") // Changed ID to us-map
+                .attr("id", "us-map")
                 .attr("viewBox", `0 0 ${width} ${height}`)
                 .attr("preserveAspectRatio", "xMidYMid meet");
 
             // Define a projection for the United States
-            const projection = d3.geoAlbersUsa() // d3.geoAlbersUsa is good for US maps
-                .scale(width * 1.2) // Adjust scale to fit the container
-                .translate([width / 2, height / 2]); // Center the map
+            const projection = d3.geoAlbersUsa()
+                .scale(width * 1.2)
+                .translate([width / 2, height / 2]);
 
             const path = d3.geoPath().projection(projection);
 
             const tooltip = d3.select(".tooltip");
 
-            // Load US states map data from unpkg CDN (us-atlas)
-            d3.json("https://unpkg.com/us-atlas@3.0.0/states-albers-10m.json").then(function(us) {
-                // Get state features
+            // Load US states map data from a more reliable source (TopoJSON from Mike Bostock's examples)
+            // This source is known to have correct geometry for states.
+            d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json").then(function(us) {
+                // Get state features. Note: the object name in this topojson is 'states'
                 const states = topojson.feature(us, us.objects.states);
 
                 // Define the states to highlight
@@ -177,27 +178,27 @@
                     .attr("class", d => {
                         const name = d.properties.name;
                         if (statesToHighlight.includes(name)) {
-                            return "state highlighted"; // Changed class to state
+                            return "state highlighted";
                         }
-                        return "state greyed-out"; // Changed class to state
+                        return "state greyed-out";
                     })
                     .attr("d", path)
                     .on("mouseover", function(event, d) {
-                        d3.select(this).style("stroke-width", "1.5px").style("stroke", "#333"); // Thicker border on hover
+                        d3.select(this).style("stroke-width", "1.5px").style("stroke", "#333");
                         tooltip.style("opacity", 1)
                             .html(d.properties.name)
                             .style("left", (event.pageX + 10) + "px")
                             .style("top", (event.pageY - 28) + "px");
                     })
                     .on("mouseout", function(event, d) {
-                        d3.select(this).style("stroke-width", "0.5px").style("stroke", "#ffffff"); // Reset border
+                        d3.select(this).style("stroke-width", "0.5px").style("stroke", "#ffffff");
                         tooltip.style("opacity", 0);
                     });
 
                 // Handle window resize
                 window.addEventListener('resize', function() {
                     const newWidth = document.getElementById('map-container').clientWidth;
-                    const newHeight = newWidth * 0.6; // Maintain aspect ratio
+                    const newHeight = newWidth * 0.6;
 
                     svg.attr("viewBox", `0 0 ${newWidth} ${newHeight}`);
                     projection.scale(newWidth * 1.2).translate([newWidth / 2, newHeight / 2]);
