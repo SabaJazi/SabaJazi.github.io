@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun - World Map</title>
+    <title>Fun - US States Map</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Playfair Display for headings, Inter for body -->
@@ -77,24 +77,24 @@
             justify-content: center;
             align-items: center;
         }
-        #world-map {
+        #us-map { /* Changed ID from world-map to us-map */
             display: block; /* Ensure SVG takes up space */
             width: 100%;
             height: 100%;
         }
-        .country {
-            stroke: #ffffff; /* White borders for countries */
+        .state { /* Changed class from country to state */
+            stroke: #ffffff; /* White borders for states */
             stroke-width: 0.5px;
             transition: fill 0.3s ease;
         }
-        .country:hover {
+        .state:hover { /* Changed class from country to state */
             opacity: 0.8;
         }
         .highlighted {
-            fill: #4A90E2; /* Professional blue for highlighted countries */
+            fill: #4A90E2; /* Professional blue for highlighted states */
         }
         .greyed-out {
-            fill: #CCCCCC; /* Grey for other countries */
+            fill: #CCCCCC; /* Grey for other states */
         }
 
         /* Tooltip style */
@@ -119,16 +119,16 @@
     <header class="page-header-bg py-16 text-center">
         <div class="container flex flex-col items-center">
             <a href="index.html" class="btn-minimal mb-6 text-base px-4 py-2 hover:shadow-lg">← Back to Portfolio</a>
-            <h1 class="text-5xl font-playfair-display font-bold mb-3">My Fun Map</h1>
-            <p class="text-xl font-light text-gray-700 mb-8">Where I've been (and where my heart is).</p>
+            <h1 class="text-5xl font-playfair-display font-bold mb-3">My Fun Map: US States</h1>
+            <p class="text-xl font-light text-gray-700 mb-8">Exploring my favorite states.</p>
         </div>
     </header>
 
     <!-- Map Section -->
     <section class="section-bg-cohesive container text-center">
-        <h2 class="text-4xl font-playfair-display font-bold mb-12 text-gray-800">Countries of Interest</h2>
+        <h2 class="text-4xl font-playfair-display font-bold mb-12 text-gray-800">States of Interest</h2>
         <p class="text-lg leading-relaxed max-w-3xl mx-auto mb-10 text-gray-700">
-            This map highlights Iran, the United States, and Turkey. Hover over a country to see its name!
+            This map highlights Texas, California, Washington, and Nevada. Hover over a state to see its name!
         </p>
         <div id="map-container">
             <!-- D3.js will render the SVG map here -->
@@ -146,37 +146,40 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const width = document.getElementById('map-container').clientWidth;
-            const height = width * 0.5625; // 16:9 aspect ratio
+            const height = width * 0.6; // Adjusted aspect ratio for US map, typically wider
 
             const svg = d3.select("#map-container")
                 .append("svg")
-                .attr("id", "world-map")
+                .attr("id", "us-map") // Changed ID to us-map
                 .attr("viewBox", `0 0 ${width} ${height}`)
                 .attr("preserveAspectRatio", "xMidYMid meet");
 
-            const projection = d3.geoMercator()
-                .scale(width / (2 * Math.PI)) // Adjust scale based on container width
-                .translate([width / 2, height / 1.5]); // Center the map
+            // Define a projection for the United States
+            const projection = d3.geoAlbersUsa() // d3.geoAlbersUsa is good for US maps
+                .scale(width * 1.2) // Adjust scale to fit the container
+                .translate([width / 2, height / 2]); // Center the map
 
             const path = d3.geoPath().projection(projection);
 
             const tooltip = d3.select(".tooltip");
 
-            // Load world map data from unpkg CDN
-            d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json").then(function(world) {
-                // Filter for countries data
-                const countries = topojson.feature(world, world.objects.countries);
+            // Load US states map data from unpkg CDN (us-atlas)
+            d3.json("https://unpkg.com/us-atlas@3.0.0/states-albers-10m.json").then(function(us) {
+                // Get state features
+                const states = topojson.feature(us, us.objects.states);
+
+                // Define the states to highlight
+                const statesToHighlight = ["Texas", "California", "Washington", "Nevada"];
 
                 svg.selectAll("path")
-                    .data(countries.features)
+                    .data(states.features)
                     .enter().append("path")
                     .attr("class", d => {
                         const name = d.properties.name;
-                        // Adjust country names for matching with GeoJSON data
-                        if (name === "Iran" || name === "United States" || name === "Turkey") {
-                            return "country highlighted";
+                        if (statesToHighlight.includes(name)) {
+                            return "state highlighted"; // Changed class to state
                         }
-                        return "country greyed-out";
+                        return "state greyed-out"; // Changed class to state
                     })
                     .attr("d", path)
                     .on("mouseover", function(event, d) {
@@ -194,15 +197,14 @@
                 // Handle window resize
                 window.addEventListener('resize', function() {
                     const newWidth = document.getElementById('map-container').clientWidth;
-                    const newHeight = newWidth * 0.5625;
+                    const newHeight = newWidth * 0.6; // Maintain aspect ratio
 
                     svg.attr("viewBox", `0 0 ${newWidth} ${newHeight}`);
-                    projection.scale(newWidth / (2 * Math.PI)).translate([newWidth / 2, newHeight / 1.5]);
+                    projection.scale(newWidth * 1.2).translate([newWidth / 2, newHeight / 2]);
                     svg.selectAll("path").attr("d", path);
                 });
             }).catch(function(error) {
                 console.error("Error loading the GeoJSON data or rendering map:", error);
-                // Display a user-friendly message if map fails to load
                 d3.select("#map-container").html("<p class='text-red-500'>Failed to load map. Please try again later.</p>");
             });
         });
