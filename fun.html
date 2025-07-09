@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-#map {
-  height: 90vh;
-  width: 100%;
-}
-
-.leaflet-popup-content img {
-  max-width: 100%;
-}
-</style>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Visited Countries Map</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+    .leaflet-popup-content img {
+      max-width: 100%;
+    }
+  </style>
 </head>
 <body>
   <h2>Select visited countries</h2>
   <div id="map"></div>
 
+  <!-- Leaflet and jQuery -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-ajax"></script>
   <script src="https://unpkg.com/jquery"></script>
-  <script src="js/script.js"></script>
+
+  <!-- Your local script (in the same folder as index.html) -->
+  <script src="script.js"></script>
 </body>
 </html>
