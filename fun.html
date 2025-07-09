@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- D3.js CDN for map visualization -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- TopoJSON CDN for converting TopoJSON to GeoJSON -->
+    <script src="https://unpkg.com/topojson-client@3"></script>
     <style>
         /* Custom styles to override/enhance Tailwind for a specific look */
         body {
@@ -160,8 +162,8 @@
 
             const tooltip = d3.select(".tooltip");
 
-            // Load world map data
-            d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(function(world) {
+            // Load world map data from unpkg CDN
+            d3.json("https://unpkg.com/world-atlas@2.0.2/countries-110m.json").then(function(world) {
                 // Filter for countries data
                 const countries = topojson.feature(world, world.objects.countries);
 
