@@ -1,6 +1,6 @@
 // List of visited countries and images
 const visitedCountries = {
-  "US": "imgs/us.jpg",
+  "US": "SabaJazi.github.io/imgs/us.jpg",
   "FR": "imgs/france.jpg",
   "JP": "imgs/japan.jpg"
 };
