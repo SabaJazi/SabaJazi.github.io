@@ -1,32 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Visited Countries Map</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <style>
-    #map {
-      height: 90vh;
-      width: 100%;
-    }
-    .leaflet-popup-content img {
-      display: block;
-    margin-top: 5px;
-    max-width: 100%;
-    height: auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun - World Map</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display for headings, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- D3.js CDN for map visualization -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* Custom styles to override/enhance Tailwind for a specific look */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fefefe; /* Very subtle off-white for a clean look */
+            color: #333333; /* Dark grey text */
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: #1a1a1a; /* Almost black for headings */
+        }
+        .container {
+            max-width: 1000px; /* Consistent narrower container for elegance */
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        section {
+            padding: 6rem 0; /* Consistent vertical spacing */
+            margin-bottom: 0; /* Remove margin-bottom from sections */
+        }
+
+        /* Reusable button style from main portfolio */
+        .btn-minimal {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #1a1a1a;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .btn-minimal:hover {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Cohesive Color Palette for sections */
+        .page-header-bg {
+            background: linear-gradient(135deg, #FFF8F0 0%, #FEFEFB 100%); /* Very light, subtle warm gradient */
+        }
+        .section-bg-cohesive {
+            background-color: #FDFBF8; /* Consistent very soft warm white */
+        }
+        .footer-bg-cohesive {
+            background-color: #F4F4F4; /* Consistent slightly darker light grey from footer */
+        }
+
+        /* Map specific styles */
+        #map-container {
+            width: 100%;
+            max-width: 900px; /* Max width for the map */
+            margin: 0 auto;
+            border-radius: 0.75rem; /* Rounded corners for the map container */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Soft shadow */
+            overflow: hidden; /* Ensure map stays within container shape */
+            background-color: #f0f0f0; /* Light background for map area */
+            aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #world-map {
+            display: block; /* Ensure SVG takes up space */
+            width: 100%;
+            height: 100%;
+        }
+        .country {
+            stroke: #ffffff; /* White borders for countries */
+            stroke-width: 0.5px;
+            transition: fill 0.3s ease;
+        }
+        .country:hover {
+            opacity: 0.8;
+        }
+        .highlighted {
+            fill: #4A90E2; /* Professional blue for highlighted countries */
+        }
+        .greyed-out {
+            fill: #CCCCCC; /* Grey for other countries */
+        }
+
+        /* Tooltip style */
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 4px;
+            pointer-events: none;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 1000;
+        }
+    </style>
 </head>
-<body>
-  <h2>Select visited countries</h2>
-  <div id="map"></div>
+<body class="antialiased">
 
-  <!-- Leaflet and jQuery -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/jquery"></script>
+    <!-- Page Header Section -->
+    <header class="page-header-bg py-16 text-center">
+        <div class="container flex flex-col items-center">
+            <a href="index.html" class="btn-minimal mb-6 text-base px-4 py-2 hover:shadow-lg">← Back to Portfolio</a>
+            <h1 class="text-5xl font-playfair-display font-bold mb-3">My Fun Map</h1>
+            <p class="text-xl font-light text-gray-700 mb-8">Where I've been (and where my heart is).</p>
+        </div>
+    </header>
 
-  <!-- Your local script (in the same folder as index.html) -->
-  <script src="script.js"></script>
+    <!-- Map Section -->
+    <section class="section-bg-cohesive container text-center">
+        <h2 class="text-4xl font-playfair-display font-bold mb-12 text-gray-800">Countries of Interest</h2>
+        <p class="text-lg leading-relaxed max-w-3xl mx-auto mb-10 text-gray-700">
+            This map highlights Iran, the United States, and Turkey. Hover over a country to see its name!
+        </p>
+        <div id="map-container">
+            <!-- D3.js will render the SVG map here -->
+        </div>
+        <div class="tooltip" style="opacity:0;"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-bg-cohesive text-gray-600 text-center py-8">
+        <div class="container">
+            <p class="text-sm">&copy; 2025 [Your Name]. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const width = document.getElementById('map-container').clientWidth;
+            const height = width * 0.5625; // 16:9 aspect ratio
+
+            const svg = d3.select("#map-container")
+                .append("svg")
+                .attr("id", "world-map")
+                .attr("viewBox", `0 0 ${width} ${height}`)
+                .attr("preserveAspectRatio", "xMidYMid meet");
+
+            const projection = d3.geoMercator()
+                .scale(width / (2 * Math.PI)) // Adjust scale based on container width
+                .translate([width / 2, height / 1.5]); // Center the map
+
+            const path = d3.geoPath().projection(projection);
+
+            const tooltip = d3.select(".tooltip");
+
+            // Load world map data
+            d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(function(world) {
+                // Filter for countries data
+                const countries = topojson.feature(world, world.objects.countries);
+
+                svg.selectAll("path")
+                    .data(countries.features)
+                    .enter().append("path")
+                    .attr("class", d => {
+                        const name = d.properties.name;
+                        // Adjust country names for matching with GeoJSON data
+                        if (name === "Iran" || name === "United States" || name === "Turkey") {
+                            return "country highlighted";
+                        }
+                        return "country greyed-out";
+                    })
+                    .attr("d", path)
+                    .on("mouseover", function(event, d) {
+                        d3.select(this).style("stroke-width", "1.5px").style("stroke", "#333"); // Thicker border on hover
+                        tooltip.style("opacity", 1)
+                            .html(d.properties.name)
+                            .style("left", (event.pageX + 10) + "px")
+                            .style("top", (event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function(event, d) {
+                        d3.select(this).style("stroke-width", "0.5px").style("stroke", "#ffffff"); // Reset border
+                        tooltip.style("opacity", 0);
+                    });
+
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    const newWidth = document.getElementById('map-container').clientWidth;
+                    const newHeight = newWidth * 0.5625;
+
+                    svg.attr("viewBox", `0 0 ${newWidth} ${newHeight}`);
+                    projection.scale(newWidth / (2 * Math.PI)).translate([newWidth / 2, newHeight / 1.5]);
+                    svg.selectAll("path").attr("d", path);
+                });
+            }).catch(function(error) {
+                console.error("Error loading the GeoJSON data or rendering map:", error);
+                // Display a user-friendly message if map fails to load
+                d3.select("#map-container").html("<p class='text-red-500'>Failed to load map. Please try again later.</p>");
+            });
+        });
+    </script>
+
 </body>
 </html>
