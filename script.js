@@ -1,48 +1,46 @@
-// List of visited countries and their image paths
+// Visited countries with image paths (use 2-letter ISO codes from GeoJSON 'id' field)
 const visitedCountries = {
   "US": "imgs/us.jpg",
-  "FR": "imgs/france.jpg",
-  "JP": "imgs/japan.jpg"
+  "TR": "imgs/japan.jpg",
+  "IR": "imgs/france.jpg"
 };
 
-// Initialize the map
+// Initialize map
 const map = L.map('map').setView([20, 0], 2);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data © OpenStreetMap contributors'
 }).addTo(map);
 
-// Load GeoJSON world borders
+// Load country borders GeoJSON
 $.getJSON("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json", function(data) {
   L.geoJSON(data, {
     style: function(feature) {
-      const code = feature.id; // <-- use feature.id instead of iso_a2
+      const code = feature.id;
       return {
         color: "#333",
-        fillColor: visitedCountries[code] ? "#2ecc71" : "#ccc",
+        fillColor: visitedCountries[code] ? "#2ecc71" : "#ccc", // green if visited, grey otherwise
         fillOpacity: 0.6,
         weight: 1
       };
     },
     onEachFeature: function(feature, layer) {
-      const code = feature.id; // <-- match the same code key here
+      const code = feature.id;
 
-      // Pre-bind popup if visited
+      // Only make visited countries interactive
       if (visitedCountries[code]) {
-        const img = visitedCountries[code];
-        layer.bindPopup(`<strong>${feature.properties.name}</strong><br><img src="${img}" alt="${feature.properties.name}" width="150"/>`);
-      }
+        const imgPath = visitedCountries[code];
+        const popupHtml = `
+          <strong>${feature.properties.name}</strong><br>
+          <img src="${imgPath}" alt="${feature.properties.name}" width="150" style="border-radius: 8px;" />
+        `;
+        layer.bindPopup(popupHtml);
 
-      layer.on('click', function() {
-        if (visitedCountries[code]) {
+        // Optional: open on click
+        layer.on('click', function () {
           layer.openPopup();
-        } else {
-          // Mark dynamically as visited
-          visitedCountries[code] = "imgs/default.jpg"; // placeholder image
-          layer.setStyle({ fillColor: "#2ecc71" });
-          alert(`${feature.properties.name} marked as visited. Add an image to visitedCountries if desired.`);
-        }
-      });
+        });
+      }
     }
   }).addTo(map);
 });
