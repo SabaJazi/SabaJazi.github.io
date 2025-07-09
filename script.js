@@ -1,6 +1,6 @@
 // Visited countries with image paths (use 2-letter ISO codes from GeoJSON 'id' field)
 const visitedCountries = {
-  "US": "https://sabajazi.github.io/imgs/us.jpg",
+  "US": "https://raw.githubusercontent.com/SabaJazi/SabaJazi.github.io/refs/heads/main/imgs/us.jpg",
   "TR": "https://sabajazi.github.io/imgs/japan.jpg",
   "IR": "https://sabajazi.github.io/imgs/france.jpg"
 };
