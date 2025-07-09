@@ -15,25 +15,33 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Load GeoJSON world borders
 $.getJSON("https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json", function(data) {
   L.geoJSON(data, {
-    style: feature => {
+    style: function(feature) {
+      const countryCode = feature.properties.iso_a2;
+      // Highlight visited countries in green, others in gray
       return {
         color: "#333",
-        fillColor: visitedCountries[feature.properties.iso_a2] ? "#2ecc71" : "#ccc",
+        fillColor: visitedCountries[countryCode] ? "#2ecc71" : "#ccc",
         fillOpacity: 0.6,
         weight: 1
       };
     },
-    onEachFeature: (feature, layer) => {
+    onEachFeature: function(feature, layer) {
       const countryCode = feature.properties.iso_a2;
+
+      // If visited, bind popup immediately
+      if (visitedCountries[countryCode]) {
+        const img = visitedCountries[countryCode];
+        layer.bindPopup(`<strong>${feature.properties.name}</strong><br><img src="${img}" alt="${feature.properties.name}" />`);
+      }
+
+      // Add click functionality
       layer.on('click', function() {
         if (visitedCountries[countryCode]) {
-          const img = visitedCountries[countryCode];
-          layer.bindPopup(`<strong>${feature.properties.name}</strong><br><img src="${img}" alt="${feature.properties.name}" />`).openPopup();
+          layer.openPopup();
         } else {
-          // If not visited, mark as visited dynamically
-          visitedCountries[countryCode] = "imgs/default.jpg"; // placeholder
+          visitedCountries[countryCode] = "imgs/default.jpg"; // fallback image
           layer.setStyle({ fillColor: "#2ecc71" });
-          alert(`${feature.properties.name} marked as visited. Add an image in your JS to customize.`);
+          alert(`${feature.properties.name} marked as visited. Add an image to visitedCountries if desired.`);
         }
       });
     }
