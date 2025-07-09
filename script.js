@@ -1,8 +1,8 @@
 // List of visited countries and images
 const visitedCountries = {
   "US": "imgs/us.jpg",
-  "FR": "imgs/france.jpeg",
-  "JP": "imgs/japan.jpeg"
+  "FR": "imgs/france.jpg",
+  "JP": "imgs/japan.jpg"
 };
 
 // Map init
