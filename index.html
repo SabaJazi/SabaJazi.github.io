@@ -75,7 +75,7 @@
             align-items: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 5rem; /* More space between projects */
-            padding: 18rem; /* Increased internal padding for content clearance */
+            padding: 4rem; /* Increased internal padding for content clearance */
             overflow: hidden; /* Crucial for clipping content to the rounded shape */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Soft shadow on the whole card */
         }
@@ -91,7 +91,7 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: flex-start;
-                padding: 4rem; /* Increased padding on larger screens */
+                padding: 6rem; /* Increased padding on larger screens */
             }
             .project-card:nth-child(even) { /* Alternate image position */
                 flex-direction: row-reverse;
@@ -103,16 +103,14 @@
             .project-content {
                 flex: 1;
                 /* Adjust padding based on image side for better separation */
-                padding-left: 13rem;
-                padding-right: 0; /* Default for odd child */
+                /* Increased padding on the side away from the image to prevent clipping */
+                padding: 3rem 5rem 3rem 5rem; /* More generous padding for content */
             }
             .project-card:nth-child(even) .project-content {
-                padding-left: 0;
-                padding-right: 3rem;
+                padding: 3rem 5rem 3rem 0; /* Adjust padding for reversed order */
             }
              .project-card:nth-child(odd) .project-content {
-                padding-left: 3rem;
-                padding-right: 0;
+                padding: 3rem 0 3rem 5rem; /* Adjust padding for normal order */
             }
         }
 
